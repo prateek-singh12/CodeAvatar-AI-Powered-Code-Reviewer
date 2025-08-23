@@ -11,13 +11,11 @@ import { Clipboard } from 'lucide-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-const ai = new GoogleGenAI({ apiKey: "AIzaSyDv3vQLN6Mj_0w93qJU-qSYFiWMnDn2w4o" });
 
-// Add this import at the top with your other imports
+
 import { useContext } from 'react';
 import { ThemeContext } from './context/ThemeContext';
 
-// Then in your App component, add this line near the top
 const App = () => {
   const { theme } = useContext(ThemeContext);
   const options = [
@@ -102,7 +100,7 @@ const App = () => {
       }
     }),
   };
-
+  const ai = new GoogleGenAI({ apiKey: "AIzaSyCISaRmzmcJNDVpZdYUbUMrwr5TbYrK_B8" });
   async function reviewCode() {
     setResponse("");
     setLoading(true);
@@ -164,6 +162,7 @@ ${code}
       setLoading(false);
     }
   }
+  
 
   // New function to fix code
   async function fixCodeFunction() {
@@ -298,6 +297,7 @@ ${code}
               components={{
                 code({node, inline, className, children, ...props}) {
                   const match = /language-(\w+)/.exec(className || '');
+                  //const match = /language-(\w+)/.exec(className || '');
                   const [copied, setCopied] = useState(false);
                   const handleCopy = () => {
                     navigator.clipboard.writeText(String(children));
@@ -309,6 +309,7 @@ ${code}
                       <button
                         onClick={handleCopy}
                         className="clipboard-btn"
+                        
                         style={{ position: 'absolute', top: 8, right: 8, zIndex: 2, display: 'flex', alignItems: 'center', gap: '4px' }}
                       >
                         <Clipboard size={14} className="clipboard-icon" />
